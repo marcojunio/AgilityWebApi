@@ -1,7 +1,5 @@
 using AgilityWeb.Api.Settings;
 using AgilityWeb.Infra.Context;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 
 namespace AgilityWeb.Api
 {
@@ -25,36 +22,16 @@ namespace AgilityWeb.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AgilityContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("AgilityWebConnection")));
 
             var tokenConfiguration = Configuration.GetSection("TokenConfiguration").Get<TokenConfiguration>();
             services.AddSingleton(tokenConfiguration);
 
+            services.AddDbContext<AgilityContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("AgilityWebConnection")));
+
+            StartupAuthentication.ConfigureAuthentication(services, tokenConfiguration);
             services.AddCors();
             services.AddControllers();
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                var paramsOptions = options.TokenValidationParameters;
-                paramsOptions.ValidAudience = tokenConfiguration.Audience;
-                paramsOptions.ValidIssuer = tokenConfiguration.Issuer;
-                paramsOptions.ClockSkew = TimeSpan.Zero;
-
-                paramsOptions.ValidateLifetime = true;
-                paramsOptions.ValidateIssuerSigningKey = true;
-                paramsOptions.ValidateAudience = true;
-            });
-
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-            });
 
             services.AddSwaggerGen(c =>
             {
