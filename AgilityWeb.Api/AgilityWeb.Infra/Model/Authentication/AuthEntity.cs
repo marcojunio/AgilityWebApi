@@ -28,7 +28,10 @@ namespace AgilityWeb.Infra.Model.Authentication
             entity.Property(x => x.DateInsert).HasColumnName("DATE_INSERT");
             entity.Property(x => x.DateEdition).HasColumnName("DATE_EDITION");
 
-            entity.HasOne(x => x.UserEntity).WithMany().HasForeignKey(x => x.IdUser).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.UserEntity)
+                .WithOne(x => x.AuthEntity)
+                .HasForeignKey<AuthEntity>(x => x.IdUser)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace AgilityWeb.Common.Utils.Security
@@ -81,5 +82,18 @@ namespace AgilityWeb.Common.Utils.Security
 
             return infosToken;
         }
+
+
+        //
+        // public string HashPassword(string pass)
+        // {
+        //     byte[] buffer = Encoding.ASCII.GetBytes(pass);
+        //
+        //     var sh1 = new SHA1CryptoServiceProvider();
+        //     var hash = sh1.ComputeHash(buffer);
+        //
+        //     var teste=  KeyDeri
+        //     return hash.ToString();
+        // }
     }
 }
