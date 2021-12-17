@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AgilityWeb.Common.Utils.Security.Base
 {
+    /// <summary>
+    /// Params with generate token jwt
+    /// </summary>
     public class TokenBearerParams
     {
         public string UniqueName { get; set; }

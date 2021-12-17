@@ -1,5 +1,5 @@
 ﻿
-namespace AgilityWeb.Infra
+namespace AgilityWeb.Infra.Base.Factory
 {
     public abstract class FactoryConverterModelToDto<TEnt,TDto> where TEnt : new() where TDto : new()
     {

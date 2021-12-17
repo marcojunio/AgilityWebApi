@@ -9,6 +9,10 @@ using System.Text;
 
 namespace AgilityWeb.Common.Utils.Security
 {
+    
+    /// <summary>
+    /// helpers in cryptography and decrypt
+    /// </summary>
     public class SecurityMethods
     {
 
@@ -19,7 +23,11 @@ namespace AgilityWeb.Common.Utils.Security
             _tokenConfiguration = tokenConfiguration;
         }
 
-
+        /// <summary>
+        /// Generate token JWT with method Sha256
+        /// </summary>
+        /// <param name="tokenBearerParams"></param>
+        /// <returns></returns>
         public string GenerateBearerToken(TokenBearerParams tokenBearerParams)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -57,6 +65,21 @@ namespace AgilityWeb.Common.Utils.Security
 
             return tokenHandler.WriteToken(token);
 
+        }
+
+    
+        /// <summary>
+        /// Decrypt token jwt
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public JwtSecurityToken DecryptTokenJwt(string token)
+        {
+            var jwtSecurityToken = new JwtSecurityTokenHandler();
+            var tokenDecrypt = jwtSecurityToken.ReadToken(token);
+            var infosToken = tokenDecrypt as JwtSecurityToken;
+
+            return infosToken;
         }
     }
 }
