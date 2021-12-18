@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AgilityWeb.Common\AgilityWeb.Common.csproj" />
+    <ProjectReference Include="..\AgilityWeb.CoreDI\AgilityWeb.CoreDI.csproj" />
+    <ProjectReference Include="..\AgilityWeb.Core\AgilityWeb.Core.csproj" />
     <ProjectReference Include="..\AgilityWeb.Infra\AgilityWeb.Infra.csproj" />
   </ItemGroup>
 

@@ -3,13 +3,11 @@ using System.Threading.Tasks;
 
 namespace AgilityWeb.Infra.Base.Validator
 {
-    public class AbstractValidator<T> where T : EntityBase
+    public abstract class AbstractValidator<T> where T : EntityBase
     {
+        public List<string> Errors { get; set; }
         public bool IsValid { get; set; } = true;
 
-        public virtual List<string> Validation(T obj)
-        {
-            return default;
-        }
+        public abstract void Validation(T obj);
     }
 }

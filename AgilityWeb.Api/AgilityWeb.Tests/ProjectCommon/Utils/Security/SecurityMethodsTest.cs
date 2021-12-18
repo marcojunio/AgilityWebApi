@@ -30,14 +30,6 @@ namespace AgilityWeb.Tests.ProjectCommon.Utils.Security
                 Assert.NotNull(claims[claimsKeyGetValue]);
             }
         }
-        
-        
-        private static TokenConfiguration tokenConfiguration = new()
-        {
-            Key = "TOKJSDHFOJKSDHFHSDFDFSDI",
-            Audience = "LFDJFPKDFLSÇGSD5",
-            Issuer = "dijfsdoifjsdijfsd"
-        };
 
         private static TokenBearerParams tokenBearerParams = new()
         {
@@ -51,7 +43,7 @@ namespace AgilityWeb.Tests.ProjectCommon.Utils.Security
             ExtraClaims = new Dictionary<string, string> {{"user", "user"}, {"email", "email"}}
         };
         
-        private SecurityMethods securityMethods = new(tokenConfiguration);
+        private SecurityMethods securityMethods = new();
 
     }
 }

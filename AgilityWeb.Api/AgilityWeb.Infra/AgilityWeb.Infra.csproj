@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AgilityWeb.Common\AgilityWeb.Common.csproj" />
     <ProjectReference Include="..\AgilityWeb.Domain\AgilityWeb.Domain.csproj" />
   </ItemGroup>
 

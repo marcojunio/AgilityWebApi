@@ -1,3 +1,4 @@
+using AgilityWeb.Api.Middlewares;
 using AgilityWeb.Api.Settings;
 using AgilityWeb.Infra.Context;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,8 @@ namespace AgilityWeb.Api
             options.UseSqlServer(Configuration.GetConnectionString("AgilityWebConnection")));
 
             StartupAuthentication.ConfigureAuthentication(services, tokenConfiguration);
+            StartupMiddlewares.ConfigureMiddlewares(services);
+            
             services.AddCors();
             services.AddControllers();
 
@@ -49,6 +52,7 @@ namespace AgilityWeb.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AgilityWeb.Api v1"));
             }
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseRouting();

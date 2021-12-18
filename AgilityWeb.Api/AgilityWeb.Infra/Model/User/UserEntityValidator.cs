@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using AgilityWeb.Common.Exceptions;
 using AgilityWeb.Infra.Base.Validator;
 
 namespace AgilityWeb.Infra.Model.User
@@ -9,31 +11,35 @@ namespace AgilityWeb.Infra.Model.User
     {
         public static UserEntityValidator Factory() => new UserEntityValidator();
 
-        public override List<string> Validation(UserEntity user)
+        public override void Validation(UserEntity user)
         {
             if (!string.IsNullOrEmpty(user.Document))
-                user.ErrorReason.Add("Document is required.");
+                Errors.Add("Document is required");
 
             if (!string.IsNullOrEmpty(user.Email))
-                user.ErrorReason.Add("E-mail is required.");
+                Errors.Add("E-mail is required.");
 
             if (!string.IsNullOrEmpty(user.FirstName))
-                user.ErrorReason.Add("First name is required.");
+                Errors.Add("First name is required.");
 
             if (!string.IsNullOrEmpty(user.LastName))
-                user.ErrorReason.Add("Last name is required.");
+                Errors.Add("Last name is required.");
 
             if (!string.IsNullOrEmpty(user.AuthEntity.Login))
-                user.ErrorReason.Add("Login is required.");
+                Errors.Add("Login is required.");
 
             if (!string.IsNullOrEmpty(user.AuthEntity.Password))
-                user.ErrorReason.Add("Password is required.");
+                Errors.Add("Password is required.");
 
-            
-            if (user.ErrorReason.Any())
+
+            if (Errors.Any())
+            {
+                string errors = "";
+                Errors.ForEach(s => { errors += $"{s}\t"; });
+
                 IsValid = false;
-
-            return user.ErrorReason;
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errors);
+            }
         }
     }
 }
