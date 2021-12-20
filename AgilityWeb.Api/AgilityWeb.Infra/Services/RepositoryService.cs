@@ -155,7 +155,7 @@ namespace AgilityWeb.Infra.Services
         }
 
         /// <summary>
-        /// Remove o registro por Id
+        /// Remove registry by id
         /// </summary>
         /// <returns></returns>
         public async Task DeleteAsync(string id, bool saveChanges)
@@ -177,7 +177,7 @@ namespace AgilityWeb.Infra.Services
         }
 
         /// <summary>
-        /// Retorna todos os registros 
+        /// Return all registrys 
         /// </summary>
         /// <param name="sort"></param>
         /// <returns></returns>
@@ -193,7 +193,7 @@ namespace AgilityWeb.Infra.Services
         }
 
         /// <summary>
-        /// Salva todos os registros
+        /// Save all registrys
         /// </summary>
         /// <param name="dtos"></param>
         /// <param name="saveChanges"></param>
