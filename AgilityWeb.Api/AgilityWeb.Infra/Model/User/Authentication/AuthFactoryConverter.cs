@@ -1,5 +1,5 @@
-using AgilityWeb.Domain.Model.Authentication;
 using AgilityWeb.Domain.Model.User;
+using AgilityWeb.Domain.Model.User.Authentication;
 using AgilityWeb.Infra.Base.Factory;
 using AgilityWeb.Infra.Model.User;
 

@@ -4,6 +4,7 @@ namespace AgilityWeb.Common.Exceptions
 {
     public class ErrorDetails
     {
+        public string TitleError { get; set; }
         public int StatusCode { get; set; }
         public string Message { get; set; }
 

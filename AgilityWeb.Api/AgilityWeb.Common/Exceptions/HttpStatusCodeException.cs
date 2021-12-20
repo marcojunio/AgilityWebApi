@@ -8,26 +8,24 @@ namespace AgilityWeb.Common.Exceptions
     {
         public HttpStatusCode StatusCode { get; set; }
         public string ContentType { get; set; }
+        public string TitleError { get; set; }
 
-        public HttpStatusCodeException(HttpStatusCode httpStatusCode, HttpStatusCode statusCode)
+        public HttpStatusCodeException(string titleError, HttpStatusCode httpStatusCode, HttpStatusCode statusCode)
         {
-            this.StatusCode = statusCode;
+            TitleError = titleError;
+            StatusCode = statusCode;
         }
 
-        public HttpStatusCodeException(HttpStatusCode statusCode, string message) : base(message)
-        {
-            this.StatusCode = statusCode;
-        }
-
-        public HttpStatusCodeException(HttpStatusCode statusCode, Exception inner)
-            : this(statusCode, inner.ToString())
-        {
-        }
-
-        public HttpStatusCodeException(HttpStatusCode statusCode, JObject errorObject)
-            : this(statusCode, errorObject.ToString())
+        public HttpStatusCodeException(string titleError, HttpStatusCode statusCode, string message) : base(message)
         {
             ContentType = @"application/json";
+            TitleError = titleError;
+            StatusCode = statusCode;
+        }
+
+        public HttpStatusCodeException(string titleError, HttpStatusCode statusCode, Exception inner)
+            : this(titleError, statusCode, inner.ToString())
+        {
         }
     }
 }

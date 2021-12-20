@@ -1,7 +1,6 @@
 using AgilityWeb.Domain.Base;
-using AgilityWeb.Domain.Model.User;
 
-namespace AgilityWeb.Domain.Model.Authentication
+namespace AgilityWeb.Domain.Model.User.Authentication
 {
     public class AuthDto : EntityDtoBase
     {

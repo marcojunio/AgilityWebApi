@@ -32,6 +32,7 @@ namespace AgilityWeb.Api.Middlewares
             {
                 result = new ErrorDetails()
                 {
+                    TitleError = exception.TitleError,
                     Message = exception.Message,
                     StatusCode = (int) exception.StatusCode
                 }.ToString();
@@ -41,24 +42,26 @@ namespace AgilityWeb.Api.Middlewares
             {
                 result = new ErrorDetails()
                 {
+                    TitleError = null,
                     Message = "Runtime Error",
                     StatusCode = (int) HttpStatusCode.BadRequest
                 }.ToString();
                 context.Response.StatusCode = (int) HttpStatusCode.BadRequest;
             }
 
-            return context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(result ?? string.Empty);
         }
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             string result = new ErrorDetails()
             {
+                TitleError = null,
                 Message = exception.Message,
                 StatusCode = (int) HttpStatusCode.InternalServerError
             }.ToString();
             context.Response.StatusCode = (int) HttpStatusCode.BadRequest;
-            return context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(result ?? string.Empty);
         }
     }
 }
